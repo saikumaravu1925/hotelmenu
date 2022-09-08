@@ -10,7 +10,6 @@ var shoppingCart = (function() {
     
     // Constructor
     function Item(name, price, count) {
-      console.log("Printing 13 ", name);
       this.name = name;
       this.price = price;
       this.count = count;
@@ -38,10 +37,8 @@ var shoppingCart = (function() {
     // Add to cart
     obj.addItemToCart = function(name, price, count) {
       for(var item in cart) {
-        console.log("Printing in 40 ",item, name, count,price);
         if(cart[item].name == name) {
-            console.log("Printing in 42 ",cart[item].name);
-          cart[item].count ++;
+          cart[item].count++;
           saveCart();
           return;
         }
@@ -116,7 +113,6 @@ var shoppingCart = (function() {
         itemCopy = {};
         for(p in item) {
           itemCopy[p] = item[p];
-  
         }
         itemCopy.total = Number(item.price * item.count).toFixed(2);
         cartCopy.push(itemCopy)
@@ -160,17 +156,15 @@ var shoppingCart = (function() {
   
   function displayCart() {
     var cartArray = shoppingCart.listCart();
-    console.log("Printing 163 ", cartArray);
     var output = "";
     for(var i in cartArray) {
-    console.log("Printing 166 ", cartArray[i].name);
       output += "<tr>"
         + "<td>" + cartArray[i].name + "</td>" 
         + "<td>(" + cartArray[i].price + ")</td>"
-        + "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name=" + cartArray[i].name + ">-</button>"
+        + "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name='" + cartArray[i].name + "'>-</button>"
         + "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"
-        + "<button class='plus-item btn btn-primary input-group-addon' data-name=" + cartArray[i].name + ">+</button></div></td>"
-        + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + ">X</button></td>"
+        + "<button class='plus-item btn btn-primary input-group-addon' data-name='" + cartArray[i].name + "'>+</button></div></td>"
+        + "<td><button class='delete-item btn btn-danger' data-name='" + cartArray[i].name + "'>X</button></td>"
         + " = " 
         + "<td>" + cartArray[i].total + "</td>" 
         +  "</tr>";
@@ -198,7 +192,6 @@ var shoppingCart = (function() {
   // +1
   $('.show-cart').on("click", ".plus-item", function(event) {
     var name = $(this).data('name');
-    console.log("Printing in 198 ",name);
     shoppingCart.addItemToCart(name);
     displayCart();
   })
